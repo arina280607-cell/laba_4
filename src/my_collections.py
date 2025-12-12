@@ -67,9 +67,9 @@ class IndexDict:
         book = self.index_isbn[isbn]
         del self.index_isbn[isbn]
         if book.year in self.index_year:
-            del self.index_year[book.year]
+            self.index_year[book.year].remove(book)
         if book.author in self.index_author:
-            del self.index_author[book.author]
+            self.index_author[book.author].remove(book)
 
     def __iter__(self):
         return iter(self.index_isbn)
