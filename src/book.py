@@ -6,6 +6,6 @@ class Book:
         self.genre = genre
         self.isbn = isbn
     def __repr__(self):
-        return f"book(title = '{self.title}', author = '{self.author}', year = '{self.year}', genge = '{self.genre}', isbn = '{self.isbn}')"
+        return f"Book(title = '{self.title}', author = '{self.author}', year = '{self.year}', genre = '{self.genre}', isbn = '{self.isbn}')"
     def __str__(self):
-        return f"'{self.title}'written by {self.author} ISBN: {self.isbn}'"
+        return f"Книга: {self.title} ({self.year}), автор: {self.author}"
