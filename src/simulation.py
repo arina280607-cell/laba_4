@@ -68,4 +68,4 @@ def simulate(steps: int = 10):
             else:
                 print(f"на шаге {i} как-то нашлась книга с isbn {ibsn_to_book}")
 
-    print("конец симуляции!")
+    print("конец!")
