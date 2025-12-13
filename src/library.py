@@ -21,14 +21,18 @@ class Library:
         return True
     def find_by_author(self, author: str) -> List[Book]: # ищем книгу по автору используя индекс
         return self.indexes.index_author.get(author, [])
-    def find_by_year(self, year: str) -> List[Book]: # ищем книгу по году используя индекс
+    def find_by_year(self, year: int) -> List[Book]: # ищем книгу по году используя индекс
         return self.indexes.index_year.get(year, [])
     def find_by_isbn(self, isbn: str) -> Optional[Book]: # получаем книгу по isbn из индекса
         return self.indexes.index_isbn.get(isbn)
+    def find_by_genre(self, genre):
+        return list(book for book in self.books if book.genre == genre)
     def __contains__(self, isbn: str) -> bool:
         return isbn in self.indexes
     def __repr__(self):
         return f"Library(books={len(self.books)}, indexes={len(self.indexes)})"
+
+
 
 
 
