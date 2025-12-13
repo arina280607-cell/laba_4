@@ -61,9 +61,9 @@ class TestIndexDict:
 
     def setup_method(self):
         self.index = IndexDict()
-        self.book1 = Book("t1", "a1", 2001, "g1", "12345")
-        self.book2 = Book("t2", "a1", 2000, "g2", "12345")
-        self.book3 = Book("t3", "a3", 2000, "g3", "12345")
+        self.book1 = Book("t1", "a1", 2001, "g1", "1")
+        self.book2 = Book("t2", "a1", 2000, "g2", "2")
+        self.book3 = Book("t3", "a3", 2000, "g3", "3")
 
     def test_set_get(self):# получение по ключу
         self.index[self.book1.isbn] = self.book1
@@ -85,7 +85,7 @@ class TestIndexDict:
         assert self.book2 in self.index.index_author["a1"]
 
         assert len(self.index.index_year[2001]) == 1
-        update_book1 = Book("t11", "a1", 2002, "g2", "12345")
+        update_book1 = Book("t11", "a1", 2002, "g2", "1")
         self.index[update_book1.isbn] = update_book1
 
         assert self.book1 not in self.index.index_year[2001]
@@ -105,14 +105,14 @@ class TestLibrary:
 
     def setup_method(self):
         self.library = Library()
-        self.book1 = Book("t1", "a1", 2000, "g1", "12345")
-        self.book2 = Book("t2", "a1", 2000, "g2", "12345")
+        self.book1 = Book("t1", "a1", 2000, "g1", "1")
+        self.book2 = Book("t2", "a1", 2000, "g2", "2")
 
     def test_add(self):
         self.library.add_book(self.book1)
         assert len(self.library.books) == 1
         assert len(self.library.indexes) == 1
-        assert self.book1.isbn in self.library.indexes
+        assert self.book1.isbn in self.library.indexes.index_isbn
 
     def test_remove(self):
         self.library.add_book(self.book1)
@@ -123,7 +123,7 @@ class TestLibrary:
         assert len(self.library.indexes) == 1
         assert "1" not in self.library.indexes
 
-        success2 = self.library.remove_book("2")
+        success2 = self.library.remove_book("3")
         assert success2 == False
 
     def test_find_author(self):
@@ -145,7 +145,7 @@ class TestLibrary:
     def test_contains(self):
         self.library.add_book(self.book1)
         assert "1" in self.library
-        assert "2" not in self.library
+        assert "3" not in self.library
 
 
 

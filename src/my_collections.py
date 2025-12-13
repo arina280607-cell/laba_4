@@ -1,6 +1,6 @@
 from typing import List, Union, Iterator, Optional
 from collections import defaultdict
-from src.book import Book
+from .book import Book
 
 
 class BookCollection:
@@ -62,7 +62,7 @@ class IndexDict:
                     self.index_author[old_book.author].remove(old_book)
                     if not self.index_author[old_book.author]:
                         del self.index_author[old_book.author]
-            if old_book in self.index_year:
+            if old_book.year in self.index_year:
                 if old_book in self.index_year[old_book.year]:
                     self.index_year[old_book.year].remove(old_book)
                     if not self.index_year[old_book.year]:
