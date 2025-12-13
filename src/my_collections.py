@@ -48,8 +48,9 @@ class IndexDict:
     """
     def __init__(self):
         self.index_isbn = {} # isbn -> книга
-        self.index_author = defaultdict(list) #список книг данного автора
-        self.index_year = defaultdict(list) #список книг по году
+        self.index_author = defaultdict(list) # список книг данного автора
+        self.index_year = defaultdict(list) # список книг по году
+        self.index_genre = defaultdict(list) # список книг по жанру
     def __getitem__(self, isbn) -> Book:
         if isbn not in self.index_isbn:
             raise IndexError(f'книга с индексом {isbn} не найдена')
@@ -63,9 +64,13 @@ class IndexDict:
             if old_book.year in self.index_year:
                 if old_book in self.index_year[old_book.year]:
                     self.index_year[old_book.year].remove(old_book)
+            if old_book.genre in self.index_genre:
+                if old_book in self.index_genre[old_book.genre]:
+                    self.index_genre[old_book.genre].remove(old_book)
         self.index_isbn[isbn] = book
         self.index_author[book.author].append(book)
         self.index_year[book.year].append(book)
+        self.index_genre[book.genre].append(book)
 
     def __delitem__(self, isbn):
         if isbn not in self.index_isbn:

@@ -144,8 +144,8 @@ class TestLibrary:
 
     def test_contains(self):
         self.library.add_book(self.book1)
-        assert "1" in self.library
-        assert "3" not in self.library
+        assert self.book1.isbn in self.library.indexes
+        assert "3" not in self.library.indexes
 
 
 

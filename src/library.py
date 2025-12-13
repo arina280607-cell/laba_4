@@ -1,4 +1,4 @@
-from . import book
+
 from .my_collections import BookCollection, IndexDict
 from .book import Book
 from typing import List, Optional
@@ -28,8 +28,8 @@ class Library:
         return self.indexes.index_isbn.get(isbn)
     def find_by_genre(self, genre):
         return list(book for book in self.books if book.genre == genre)
-    def __contains__(self, isbn: str) -> bool:
-        return isbn in self.indexes.index_isbn
+    def __contains__(self, book) -> bool:
+        return book in self.books
     def __repr__(self):
         return f"Library(books={len(self.books)}, indexes={len(self.indexes)})"
 
