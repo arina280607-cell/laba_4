@@ -56,7 +56,17 @@ class IndexDict:
         return self.index_isbn[isbn]
     def __setitem__(self, isbn, book: Book):
         if isbn in self.index_isbn:
-            return
+            old_book = self.index_isbn[isbn]
+            if old_book.author in self.index_author:
+                if old_book in self.index_author[old_book.author]:
+                    self.index_author[old_book.author].remove(old_book)
+                    if not self.index_author[old_book.author]:
+                        del self.index_author[old_book.author]
+            if old_book in self.index_year:
+                if old_book in self.index_year[old_book.year]:
+                    self.index_year[old_book.year].remove(old_book)
+                    if not self.index_year[old_book.year]:
+                        del self.index_year[old_book.year]
         self.index_isbn[isbn] = book
         self.index_author[book.author].append(book)
         self.index_year[book.year].append(book)

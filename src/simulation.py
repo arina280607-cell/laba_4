@@ -1,7 +1,6 @@
 import random
-from library import Library
-from book import Book
-from src import book
+from .library import Library
+from .book import Book
 
 
 def simulate(steps: int = 10):

@@ -28,7 +28,7 @@ class Library:
     def find_by_genre(self, genre):
         return list(book for book in self.books if book.genre == genre)
     def __contains__(self, isbn: str) -> bool:
-        return isbn in self.indexes
+        return isbn in self.indexes.index_isbn
     def __repr__(self):
         return f"Library(books={len(self.books)}, indexes={len(self.indexes)})"
 
