@@ -30,15 +30,18 @@ def simulate(steps: int = 10, seed=20):
             print(f"добавили книгу {new_book}")
             print(f"всего стало книг: {len(library.books)}")
 
-        elif event == "remove_book" and len(library.books) >= 1:
-            remove_book = random.choice(library.books)
-            isbn_removed = remove_book.isbn
-            success = library.remove_book(isbn_removed)
-            if success:
-                print(f"удалена книга {remove_book}")
-                print(f"всего стало книг: {len(library.books)}")
+        elif event == "remove_book":
+            if len(library.books) >= 1:
+                remove_book = random.choice(library.books)
+                isbn_removed = remove_book.isbn
+                success = library.remove_book(isbn_removed)
+                if success:
+                    print(f"удалена книга {remove_book}")
+                    print(f"всего стало книг: {len(library.books)}")
+                else:
+                    print(f"случилась ошибка с удалением книги {remove_book}")
             else:
-                print(f"случилась ошибка с удалением книги {remove_book}")
+                print("библиотека пуста нам не из чего удалять")
 
         elif event == "search_author":
             search_author = random.choice(authors)
@@ -55,6 +58,7 @@ def simulate(steps: int = 10, seed=20):
                 print(f"найдены книги жанра {search_genre} в количестве {len(result)} штук")
             else:
                 print(f"не найдены книги автора {search_genre}")
+
         elif event == "search_year":
             search_year = random.randint(1883, 1997)
             result = library.find_by_year(search_year)
@@ -62,13 +66,18 @@ def simulate(steps: int = 10, seed=20):
                 print(f"найдены книги, изданные в {search_year} году в количестве {len(result)} штук")
             else:
                 print(f"не найдены книги изданные в  {search_year} году")
-        elif event == "get_book_by_isbn" and len(library.books) >= 1:
-            ibsn_to_book = random.choice(list(library.indexes.keys()))
-            result = library.find_by_isbn(ibsn_to_book)
-            if result:
-                print(f"найдена книга с isbn {ibsn_to_book}: {result}")
+
+        elif event == "get_book_by_isbn":
+            if len(library.books) >= 1:
+                ibsn_to_book = random.choice(list(library.indexes.keys()))
+                result = library.find_by_isbn(ibsn_to_book)
+                if result:
+                    print(f"найдена книга с isbn {ibsn_to_book}: {result}")
+                else:
+                    print(f"не найдена книга с isbn {ibsn_to_book}")
             else:
-                print(f"не найдена книга с isbn {ibsn_to_book}")
+                print(f"библиотека пуста, нам нечего искать")
+
 
         elif event == "get_nonexistent":
             nonexistent = "ISBN: 99999999"
