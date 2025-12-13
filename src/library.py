@@ -1,3 +1,4 @@
+from . import book
 from .my_collections import BookCollection, IndexDict
 from .book import Book
 from typing import List, Optional

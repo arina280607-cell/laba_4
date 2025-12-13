@@ -1,4 +1,4 @@
-from .simulation import simulate
+from src.simulation import simulate
 if __name__ == "__main__":
-    simulate(steps=10)
+    simulate(steps=10, seed=30)
 
