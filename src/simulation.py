@@ -14,11 +14,14 @@ def simulate(steps: int = 10, seed=20):
               "ужасы"]
 
     print(f"начинается симуляция в {steps} шагов...")
-    for i in range(1, steps + 1):
+    # ошибка первая
+    for i in range(1, steps):
         event = random.choice(["add_book", "remove_book", "search_author",
                                "search_genre", "search_year", "get_book_by_isbn", "get_nonexistent"])
         print(f"шаг {i}:  событие {event}")
-        if event == "add_book":
+        # ошибка вторая
+        if event == "add_book" or "remove_book":
+            # ошибка четвертая
             new_book = Book(
                 title=random.choice(titles),
                 author=random.choice(authors),
