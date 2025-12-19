@@ -24,17 +24,15 @@ class Library:
         return self.indexes.index_author.get(author, [])
     def find_by_year(self, year: int) -> List[Book]: # ищем книгу по году используя индекс
         return self.indexes.index_year.get(year, [])
-    # пятая ошибка
+
     def find_by_isbn(self, isbn: str) -> Optional[Book]: # получаем книгу по isbn из индекса
         result = self.indexes.index_isbn.get(isbn)
-        if result is False:  # сравниваем с False через is
-            return None
         return result
     # ошибка третья
-    def find_by_genre(self, genre=None):
-        if genre is None:
-            genre = []
-        return [book for book in self.books if book.genre == genre]
+    def find_by_genre(self, genre: str):
+        books = [book for book in self.books if book.genre is "".join(genre)]
+        return books
+
     def __contains__(self, book) -> bool:
         return book in self.books
     def __repr__(self):

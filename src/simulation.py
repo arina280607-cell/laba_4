@@ -15,18 +15,19 @@ def simulate(steps: int = 10, seed=20):
 
     print(f"начинается симуляция в {steps} шагов...")
     # ошибка первая
-    for i in range(1, steps):
+    for i in range(1, steps+2):
+        ... # точка останова с условием с i
         event = random.choice(["add_book", "remove_book", "search_author",
                                "search_genre", "search_year", "get_book_by_isbn", "get_nonexistent"])
         print(f"шаг {i}:  событие {event}")
         # ошибка вторая
-        if event == "add_book" or "remove_book":
+        if event == "add_book" or event == "remove_book":
             # ошибка четвертая
             new_book = Book(
                 title=random.choice(titles),
-                author=random.choice(authors),
-                genre=random.choice(genres),
+                author=random.choice(genres),
                 year=random.choice(range(1833, 1997)),
+                genre=random.choice(genres),
                 isbn=f"ISBN:{random.randint(111111, 999999)}"
             )
             library.add_book(new_book)
@@ -72,7 +73,7 @@ def simulate(steps: int = 10, seed=20):
 
         elif event == "get_book_by_isbn":
             if len(library.books) >= 1:
-                ibsn_to_book = random.choice(list(library.indexes.keys()))
+                ibsn_to_book = random.choice(list(library.indexes.index_isbn.keys()))
                 result = library.find_by_isbn(ibsn_to_book)
                 if result:
                     print(f"найдена книга с isbn {ibsn_to_book}: {result}")
@@ -80,7 +81,6 @@ def simulate(steps: int = 10, seed=20):
                     print(f"не найдена книга с isbn {ibsn_to_book}")
             else:
                 print(f"библиотека пуста, нам нечего искать")
-
 
         elif event == "get_nonexistent":
             nonexistent = "ISBN: 99999999"
@@ -95,4 +95,8 @@ def simulate(steps: int = 10, seed=20):
         print("библиотека пуста(")
     else:
         print(f"всего книг в библиотеке: {len(library.books)}")
-    print("конец!")
+        for book in library.books:
+            print(f"Книгу забрали: {book}")
+            library.remove_book(book.isbn)
+    print(f"конец! Осталось книг: {len(library.books)}")
+    ...
